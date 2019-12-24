@@ -29,7 +29,7 @@ public class BasicTest {
 
 
     @Rule
-    public ScreenShotOnFailure failure  = new ScreenShotOnFailure(driver);
+    public ScreenShotOnFailure failure;
 
     @Before
     public void setUp() {
@@ -45,7 +45,7 @@ public class BasicTest {
         hfUser = context.getBean("HFUser", HFUser.class);
         log.info("Navigating to the home page");
         driver.get((String) context.getBean("homePage"));
-        //failure;
+        failure = new ScreenShotOnFailure(driver);
     }
 
     @After

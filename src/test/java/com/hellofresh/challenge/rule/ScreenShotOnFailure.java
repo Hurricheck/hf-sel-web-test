@@ -1,6 +1,7 @@
 package com.hellofresh.challenge.rule;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -27,18 +28,17 @@ public class ScreenShotOnFailure implements MethodRule {
                 try {
                     statement.evaluate();
                 } catch (Throwable t) {
-                    // exception will be thrown only when a test fails.
                     captureScreenShot(frameworkMethod.getName());
-                    // rethrow to allow the failure to be reported by JUnit
                     throw t;
                 }
             }
 
             public void captureScreenShot(String fileName) throws IOException {
-                File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                fileName += UUID.randomUUID().toString();
-                File targetFile = new File("/tmp/" + fileName + ".png");
-                FileUtils.copyFile(scrFile, targetFile);
+                    new File("target/surefire-reports/").mkdirs();
+                    FileOutputStream out = new FileOutputStream("target/surefire-reports/screenshot-" + fileName + ".png");
+                    out.write(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+                    out.close();
+
             }
         };
     }

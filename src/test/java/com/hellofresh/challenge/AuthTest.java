@@ -1,8 +1,9 @@
 package com.hellofresh.challenge;
 
-import com.hellofresh.challenge.page.*;
-import com.hellofresh.challenge.rule.ScreenShotOnFailure;
-import org.junit.Rule;
+import com.hellofresh.challenge.page.MainPage;
+import com.hellofresh.challenge.page.MyAccountPage;
+import com.hellofresh.challenge.page.NewAccountPage;
+import com.hellofresh.challenge.page.SignInPage;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
