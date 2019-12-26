@@ -24,9 +24,7 @@ public class BasicTest {
     protected WebDriverWait wait;
     protected ConfigurableApplicationContext context;
     protected HFUser hfUser;
-
     protected UniqueEmailFactory uniqueEmailFactory = new UniqueEmailFactory();
-
 
     @Rule
     public ScreenShotOnFailureRule failure = new ScreenShotOnFailureRule();
@@ -52,7 +50,6 @@ public class BasicTest {
     public void destroyThings() {
         context.close();
     }
-
 
     MyAccountPage logInDefaultAccount(HFUser hfUser) {
         MainPage mainPage = new MainPage(driver);
