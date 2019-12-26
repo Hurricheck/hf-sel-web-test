@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class WebDriverFactory {
     private static final String CHROME_PROPERTY = "webdriver.chrome.driver";
-//    private static final String HEADLESS_PROPERTY = "webdriver.headless";
-//    private static final String CHROME_PATH_PROPERTY = "path.chromedriver";
+    private static final String GOOGLE_CHROME_BROWSER_NAME = "google_chrome";
+
     @Autowired
     @ChromeDriverPath
     private String chromeDriverPath;
@@ -43,11 +43,15 @@ public class WebDriverFactory {
     @TimeOut
     private int timeout;
 
+    @Autowired
+    @BrowserName
+    private String browser;
+
     private static WebDriver driver;
 
-    public WebDriver getWebDriver(String browser) {
-        if ("google_chrome".equals(browser)) {
-            System.setProperty(CHROME_PROPERTY, chromeDriverPath);//TestUtil.getPropertyValue(CHROME_PATH_PROPERTY));
+    public WebDriver getWebDriver() {
+        if (GOOGLE_CHROME_BROWSER_NAME.equals(browser)) {
+            System.setProperty(CHROME_PROPERTY, chromeDriverPath);
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--window-size=1600,800");
             chromeOptions.addArguments("--allow-insecure-localhost");

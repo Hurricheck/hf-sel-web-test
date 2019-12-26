@@ -1,13 +1,13 @@
 package com.hellofresh.challenge;
 
 import com.hellofresh.challenge.page.*;
-import com.hellofresh.challenge.rule.ScreenShotOnFailure;
-import org.junit.Rule;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
+@Slf4j
 public class TestCheckOut extends BasicTest {
     private static final String ORDER_CONFIRMATION_HEADER = "ORDER CONFIRMATION";
 
@@ -27,5 +27,7 @@ public class TestCheckOut extends BasicTest {
         assertTrue(paymentPage.getLastStepIP().isDisplayed());
         assertTrue(paymentPage.getChequeInted().getText().contains("Your order on My Store is complete."));
         assertTrue(paymentPage.checkIfURLContains("controller=order-confirmation"));
+        log.info("Closing driver = {}", driver);
+        driver.close();
     }
 }

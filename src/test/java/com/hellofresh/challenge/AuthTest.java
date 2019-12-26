@@ -4,11 +4,13 @@ import com.hellofresh.challenge.page.MainPage;
 import com.hellofresh.challenge.page.MyAccountPage;
 import com.hellofresh.challenge.page.NewAccountPage;
 import com.hellofresh.challenge.page.SignInPage;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
+@Slf4j
 public class AuthTest extends BasicTest {
     private static final String MY_ACCOUNT_HEADER = "MY ACCOUNT";
     private static final String ORDER_CONFIRMATION_HEADER = "ORDER CONFIRMATION";
@@ -43,6 +45,8 @@ public class AuthTest extends BasicTest {
         assertEquals(myAccountPage.getAccount().getText(), name + " " + surname);
         assertTrue(myAccountPage.getInfoAccount().getText().contains(ACCOUNT_WELCOME_MESSAGE));
         assertTrue(myAccountPage.getLogout().isDisplayed());
+        log.info("Closing driver = {}", driver);
+        driver.close();
     }
 
     @Test
@@ -54,5 +58,7 @@ public class AuthTest extends BasicTest {
         assertTrue(myAccountPage.getInfoAccount().getText().contains(ACCOUNT_WELCOME_MESSAGE));
         assertTrue(myAccountPage.getLogout().isDisplayed());
         assertTrue(myAccountPage.checkIfURLContains("controller=my-account"));
+        log.info("Closing driver = {}", driver);
+        driver.close();
     }
 }

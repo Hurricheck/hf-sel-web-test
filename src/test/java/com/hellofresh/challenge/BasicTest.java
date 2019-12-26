@@ -7,7 +7,7 @@ import com.hellofresh.challenge.entity.HFUser;
 import com.hellofresh.challenge.page.MainPage;
 import com.hellofresh.challenge.page.MyAccountPage;
 import com.hellofresh.challenge.page.SignInPage;
-import com.hellofresh.challenge.rule.ScreenShotOnFailure;
+import com.hellofresh.challenge.rule.ScreenShotOnFailureRule;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
@@ -29,14 +29,14 @@ public class BasicTest {
 
 
     @Rule
-    public ScreenShotOnFailure failure;
+    public ScreenShotOnFailureRule failure = new ScreenShotOnFailureRule();
 
     @Before
     public void setUp() {
         context = new AnnotationConfigApplicationContext(SeleniumConfig.class);
         WebDriverFactory webDriverFactory = (WebDriverFactory) context.getBean("webDriverFactory");
         log.info("Creating WebDriver");
-        driver = webDriverFactory.getWebDriver((String) context.getBean("browserName"));
+        driver = webDriverFactory.getWebDriver();
         log.info("WebDriver created = {}", driver);
         log.info("Creating Wait element");
         wait = webDriverFactory.getWebDriverWait(driver);
@@ -45,13 +45,11 @@ public class BasicTest {
         hfUser = context.getBean("HFUser", HFUser.class);
         log.info("Navigating to the home page");
         driver.get((String) context.getBean("homePage"));
-        failure = new ScreenShotOnFailure(driver);
+        failure.setDriver(driver);
     }
 
     @After
     public void destroyThings() {
-        log.info("Closing driver = {}", driver);
-        driver.close();
         context.close();
     }
 
