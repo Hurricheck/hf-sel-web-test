@@ -41,6 +41,13 @@ public class ScreenShotOnFailureRule extends TestWatcher {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        log.info("Closing driver = {}", driver);
+        driver.close();
+    }
+
+    @Override
+    protected void succeeded(Description description) {
+        log.info("Closing driver = {}", driver);
         driver.close();
     }
 }

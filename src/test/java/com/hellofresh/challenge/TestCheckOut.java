@@ -27,7 +27,5 @@ public class TestCheckOut extends BasicTest {
         assertTrue(paymentPage.getLastStepIP().isDisplayed());
         assertTrue(paymentPage.getChequeInted().getText().contains("Your order on My Store is complete."));
         assertTrue(paymentPage.checkIfURLContains("controller=order-confirmation"));
-        log.info("Closing driver = {}", driver);
-        driver.close();
     }
 }

@@ -45,8 +45,6 @@ public class AuthTest extends BasicTest {
         assertEquals(myAccountPage.getAccount().getText(), name + " " + surname);
         assertTrue(myAccountPage.getInfoAccount().getText().contains(ACCOUNT_WELCOME_MESSAGE));
         assertTrue(myAccountPage.getLogout().isDisplayed());
-        log.info("Closing driver = {}", driver);
-        driver.close();
     }
 
     @Test
@@ -58,7 +56,5 @@ public class AuthTest extends BasicTest {
         assertTrue(myAccountPage.getInfoAccount().getText().contains(ACCOUNT_WELCOME_MESSAGE));
         assertTrue(myAccountPage.getLogout().isDisplayed());
         assertTrue(myAccountPage.checkIfURLContains("controller=my-account"));
-        log.info("Closing driver = {}", driver);
-        driver.close();
     }
 }
